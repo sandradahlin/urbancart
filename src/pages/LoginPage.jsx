@@ -39,6 +39,7 @@ export default function LoginPage() {
     // handle refresh on effect user info
 
     const payload = parseJwt(accessToken);
+    console.log(payload, "*** payload")
     document.cookie = createCookie(
       ACCESS_TOKEN,
       accessToken,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import AuthContext from "./AuthContext";
 import { ACCESS_TOKEN, REFRESH_ACCESS_TOKEN } from "../constants";
-import { createRemoveCookie, getCookie } from "../utils";
+import { createRemoveCookie, getCookie, parseJwt } from "../utils";
 
 const FIVE_MINUTES_IN_MS = 0.5 * 60 * 1000;
 
@@ -10,6 +10,18 @@ export function AuthProvider({ children }) {
   const [userInfo, setUserInfo] = useState(null);
 
   const isAuthenticated = !!token;
+
+  useEffect(() => {
+    const token = getCookie(document.cookie, ACCESS_TOKEN);
+    if (!token) {
+      // change to navigate
+      return;
+    }
+    const userInfo = parseJwt(token);
+    // TODO: HANDLE EXPIRATION FOR REFRESHING THE TOKEN
+    console.log(userInfo, "'' info")
+    setUserInfo(userInfo);
+  }, []);
 
   const refreshToken = async () => {
     const token = localStorage.getItem(REFRESH_ACCESS_TOKEN);
@@ -54,7 +66,7 @@ export function AuthProvider({ children }) {
     }, userInfo.tokenExpiresAt - FIVE_MINUTES_IN_MS - Date.now());
 
     return clearTimeout(refreshTimer);
-  }, [userInfo]);
+  }, [token]);
 
   const api = useMemo(
     () => ({
@@ -65,7 +77,7 @@ export function AuthProvider({ children }) {
       logoutUser,
       isAuthenticated,
     }),
-    [token]
+    [token, userInfo]
   );
 
   return <AuthContext.Provider value={api}>{children}</AuthContext.Provider>;
