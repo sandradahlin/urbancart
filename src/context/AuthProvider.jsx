@@ -1,21 +1,15 @@
 import React, { useEffect, useState, useMemo } from "react";
 import AuthContext from "./AuthContext";
 import { ACCESS_TOKEN, REFRESH_ACCESS_TOKEN } from "../constants";
+import { createRemoveCookie, getCookie } from "../utils";
 
 const FIVE_MINUTES_IN_MS = 0.5 * 60 * 1000;
-const COOKIE_REMOVE_DATE = "Thu, 01 Jan 1970 00:00:00 GMT";
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(getCookie(document.cookie, ACCESS_TOKEN));
   const [userInfo, setUserInfo] = useState(null);
 
-  const createRemoveCookie = (key) => {
-    let cookieItem = "";
-    cookieItem += `${encodeURIComponent(key)}=`;
-    cookieItem += `; Expires=${COOKIE_REMOVE_DATE}`;
-
-    return cookieItem;
-  };
+  const isAuthenticated = !!token;
 
   const refreshToken = async () => {
     const token = localStorage.getItem(REFRESH_ACCESS_TOKEN);
@@ -69,6 +63,7 @@ export function AuthProvider({ children }) {
       setUserInfo,
       setToken,
       logoutUser,
+      isAuthenticated,
     }),
     [token]
   );

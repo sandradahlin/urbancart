@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { SectionContainer } from "../container/SectionContainer";
 import useAuthContext from "../context/useAuthContext";
-import { parseJwt } from "../utils";
+import { createCookie, parseJwt } from "../utils";
 import { ACCESS_TOKEN, REFRESH_ACCESS_TOKEN } from "../constants";
 export default function LoginPage() {
   const username = "emilys";
@@ -11,19 +11,6 @@ export default function LoginPage() {
 
   const { setUserInfo, setToken } = useAuthContext();
 
-  const createCookie = (key, value, expiry) => {
-    if (!key || /^(?:expires|max.age|path|domain|secure)$/i.test(key)) {
-      return "";
-    }
-    const expires = `; Expires=${expiry.toUTCString()}`;
-    let cookieItem = "";
-    cookieItem += `${encodeURIComponent(key)}=`;
-    cookieItem += encodeURIComponent(value);
-    cookieItem += expires;
-
-    return cookieItem;
-  };
-  
   const handleLogin = async () => {
     // validation?
     const response = await fetch("https://dummyjson.com/auth/login", {
@@ -66,7 +53,7 @@ export default function LoginPage() {
       lastName,
       gender,
       image,
-      tokenExpiresAt: (payload.exp * 1000),
+      tokenExpiresAt: payload.exp * 1000,
     };
 
     setUserInfo(userInfo);
