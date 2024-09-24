@@ -5,66 +5,49 @@ import { SectionContainer } from "../container/SectionContainer";
 import useAuthContext from "../context/useAuthContext";
 import { createCookie, parseJwt } from "../utils";
 import { ACCESS_TOKEN, REFRESH_ACCESS_TOKEN } from "../constants";
+
 export default function LoginPage() {
-  const username = "emilys";
-  const password = "emilyspass";
+  // const username = "emilys";
+  // const password = "emilyspass";
 
-  const { setUserInfo, setToken } = useAuthContext();
+  const { username, setUsername } = useState("");
+  const { password, setPassword } = useState("");
+  const { usernameError, setUsernameError } = useState("");
+  const { passwordError, setPasswordError } = useState("");
 
-  const handleLogin = async () => {
-    // validation?
-    const response = await fetch("https://dummyjson.com/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3000",
-        "Access-Control-Allow-Credentials": "true",
-      },
-      body: JSON.stringify({
-        username: "emilys",
-        password: "emilyspass",
-        expiresInMins: 30, // optional, defaults to 60
-      }),
-    });
-    const {
-      accessToken,
-      refreshToken,
-      username,
-      email,
-      gender,
-      firstName,
-      lastName,
-      image,
-    } = await response.json();
-    // handle refresh on effect user info
+  const { handleLogin } = useAuthContext();
 
-    const payload = parseJwt(accessToken);
-    console.log(payload, "*** payload")
-    document.cookie = createCookie(
-      ACCESS_TOKEN,
-      accessToken,
-      new Date(payload.exp * 1000)
-    );
-    localStorage.setItem(REFRESH_ACCESS_TOKEN, refreshToken);
+  const validateFileds = () => {
+    if (!username) {
+      setUsernameError("Please enter email");
+    }
 
-    const userInfo = {
-      username,
-      email,
-      firstName,
-      lastName,
-      gender,
-      image,
-      tokenExpiresAt: payload.exp * 1000,
-    };
+    if (!password) {
+      setPasswordError("Please enter password");
+    }
 
-    setUserInfo(userInfo);
-    setToken(accessToken);
+    if (/^\S+@\S+\.\S+$/.test(email)) {
+      setUsernameError("Please enter a valid email");
+    }
+    if (password.length < 7) {
+      setPasswordError("The password must be 8 characters or longer");
+      return;
+    }
   };
+  // const handleSubmit = () => {
 
+  // }
   return (
     <>
       <h2>Login</h2>
       <SectionContainer>
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder="Enter your username"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </form>
         <button onClick={handleLogin}>login</button>{" "}
       </SectionContainer>
     </>
