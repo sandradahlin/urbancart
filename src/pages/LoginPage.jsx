@@ -1,56 +1,101 @@
-import React, { useEffect, useState, useContext } from "react";
-import dayjs from "dayjs";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SectionContainer } from "../container/SectionContainer";
 import useAuthContext from "../context/AuthProvider/useAuthContext";
-import { createCookie, parseJwt } from "../utils";
-import { ACCESS_TOKEN, REFRESH_ACCESS_TOKEN } from "../constants";
+import {
+  StyledForm,
+  StyledInputWrapper,
+  StyledFormWrapper,
+  StyledInput,
+  StyledFormHeading,
+  StyledValidationError,
+} from "./pages.styled";
 
+/**
+ * Login page for customer login
+ */
 export default function LoginPage() {
   // const username = "emilys";
   // const password = "emilyspass";
 
-  const { username, setUsername } = useState("");
-  const { password, setPassword } = useState("");
-  const { usernameError, setUsernameError } = useState("");
-  const { passwordError, setPasswordError } = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [validationError, setValidationError] = useState("");
+
+  const navigate = useNavigate();
 
   const { handleLogin } = useAuthContext();
 
-  const validateFileds = () => {
+  const handleUsernameInputChange = (input) => {
+    setValidationError("");
+    setUsername(input);
+  };
+
+  const handlePasswordInputChange = (input) => {
+    setValidationError("");
+    setPassword(input);
+  };
+
+  /**
+   * Validates user input fields
+   * @returns validationSuccessful
+   */
+  const validateInputFields = () => {
     if (!username) {
-      setUsernameError("Please enter email");
+      setValidationError("Please enter username");
+      return false;
     }
 
     if (!password) {
-      setPasswordError("Please enter password");
+      setValidationError("Please enter password");
+      return false;
     }
 
-    if (/^\S+@\S+\.\S+$/.test("email")) {
-      setUsernameError("Please enter a valid email");
+    if (password.length < 6) {
+      setValidationError("The password must be 7 characters or longer");
+      return false;
     }
-    if (password.length < 7) {
-      setPasswordError("The password must be 8 characters or longer");
-      return;
+    return true;
+  };
+
+  /**
+   * Handles data submission by user and validates fields
+   * If successful handle loging in user
+   */
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationSuccessful = validateInputFields();
+    if (validationSuccessful) {
+      handleLogin(username, password);
+      navigate("/home");
     }
   };
-  // const handleSubmit = () => {
 
-  // }
   return (
-    <>
-      <h2>Login</h2>
-      <SectionContainer>
-        <form>
-          {" "}
-          <input
-            placeholder="Enter your username"
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </form>
-        <button onClick={handleLogin}>login</button>{" "}
-      </SectionContainer>
-    </>
+    <SectionContainer>
+      <StyledFormWrapper>
+        <StyledFormHeading>CUSTOMER LOGIN</StyledFormHeading>
+        <StyledForm onSubmit={(e) => handleSubmit(e)}>
+          <StyledInputWrapper>
+            <StyledInput
+              placeholder="Enter your username"
+              onChange={(e) => handleUsernameInputChange(e.target.value)}
+            />
+          </StyledInputWrapper>
+          <StyledInputWrapper>
+            <StyledInput
+              placeholder="Enter your password"
+              onChange={(e) => handlePasswordInputChange(e.target.value)}
+            />
+          </StyledInputWrapper>
+          <button className="btn btn-primary" onClick={handleSubmit}>
+            login
+          </button>
+        </StyledForm>
+        {validationError && (
+          <StyledValidationError>{validationError}</StyledValidationError>
+        )}
+      </StyledFormWrapper>
+    </SectionContainer>
   );
 }

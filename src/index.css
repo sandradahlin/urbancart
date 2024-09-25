@@ -6,7 +6,7 @@ Variables
 
 :root {
   /* dark shades of primary color*/
-  --bg-color-primary: #fbf8ee;
+  --bg-color-primary: #fff;
   --clr-primary: #9c5ce0;
   --clr-header: #fbf8ee;
   --clr-secondary: #ff943d;
@@ -47,13 +47,14 @@ Global Styles
 ===============
 */
 .light-theme {
-  --bg-color-primary: #fbf8ee;
+  --bg-color-primary: #fff;
   --clr-secondary: #737373;
   --clr-tertiary: #ffffff;
   --clr-blue: #70a1cf;
   --clr-yellow: #f5c771;
   --clr-black: #222;
   --clr-toggle: #292929;
+  --clr-primary: #ec4c3b;
 }
 .dark-theme {
   --bg-color-primary: #202c73;
@@ -89,6 +90,12 @@ body {
 
   min-height: 100vh;
   transition: all 0.3s linear;
+}
+
+::placeholder {
+  /* modern browser */
+  font-family: -apple-system, BlinkMacSystemFont, "Lato", Roboto, Oxygen,
+  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 ul {
   list-style-type: none;
@@ -177,7 +184,6 @@ p {
 
 .btn {
   padding: 1rem;
-  margin: 5px;
   letter-spacing: var(--spacing);
   display: inline-block;
   font-weight: 400;
@@ -187,10 +193,15 @@ p {
   color: var(--clr-toggle);
 }
 .btn-primary {
-  background-color: var(--clr-yellow);
+  background-color: var(--clr-primary);
+  text-transform: uppercase;
+  color: var(--clr-white);
+
 }
 .btn-secondary {
   background-color: var(--clr-tertiary);
+  text-transform: uppercase;
+  border: 1px solid #888;
 }
 .btn-tertiary {
   background-color: transparent;

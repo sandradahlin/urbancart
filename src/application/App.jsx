@@ -12,8 +12,8 @@ import PrivateRoutes from "../components/PrivateRoutes";
 function App() {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route element={<PrivateRoutes />}>
