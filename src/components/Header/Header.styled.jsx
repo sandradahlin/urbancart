@@ -18,6 +18,7 @@ const StyledImage = styled.img`
 
 const UserControls = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export { StyledHeader, StyledImage, UserControls };
