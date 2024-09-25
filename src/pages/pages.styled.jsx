@@ -2,10 +2,11 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 
 const LandingPageBackground = styled.div`
-  background: url(sale.gif);
+  background: url(background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  // // TODO: change and calculate with Header
+  min-height: 106.8vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -16,7 +17,12 @@ const LandingPageBackground = styled.div`
 
 const StyledHeading = styled.h2`
   display: block;
+  font-size: 3rem;
   color: var(--clr-tertiary);
+`;
+
+const StyledIntro = styled.p`
+  color: var(--clr-white);
 `;
 
 /**
@@ -99,6 +105,7 @@ const StyledLink = styled(Link)`
 export {
   LandingPageBackground,
   StyledHeading,
+  StyledIntro,
   StyledForm,
   StyledInputWrapper,
   StyledFormWrapper,
