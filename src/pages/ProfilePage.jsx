@@ -1,37 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { SectionContainer } from "../container/SectionContainer";
+import React from "react";
+import useAuthContext from "../context/AuthProvider/useAuthContext";
+
+import { NarrowContainer } from "../container/NarrowContainer";
+import { StyledProductImage, StyledLink } from "./pages.styled";
 
 export default function ProfilePage() {
-  const [products, setProducts] = useState([]);
+  const { userInfo } = useAuthContext();
 
-  useEffect(() => {
-    const getArticles = async () => {
-      const data = await fetch("https://dummyjson.com/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json",'Access-Control-Allow-Origin': 'http://localhost:3000', 'Access-Control-Allow-Credentials': 'true' },
-        body: JSON.stringify({
-          username: "emilys",
-          password: "emilyspass",
-          expiresInMins: 30, // optional, defaults to 60
-        })
-
-      });
-    const parsed = await data.json()
-    console.log(parsed, "*** ")
-
-
-    };
-    getArticles();
-  }, []);
-
-  if (!products) {
-    return <p>no products</p>;
+  if (!userInfo) {
+    return;
   }
+  const { username, email, firstName, lastName, image } = userInfo;
+
   return (
     <>
-      <h2>My profile</h2>
-      <SectionContainer></SectionContainer>
+      <NarrowContainer>
+        <StyledLink to="/home"> {"< "}Back to products</StyledLink>
+        <StyledProductImage src={image}></StyledProductImage>
+        <div>
+          <h4>
+            {firstName} {lastName}
+          </h4>
+          <p>email: {email}</p>
+          <p>username: {username}</p>
+        </div>
+      </NarrowContainer>
     </>
   );
 }
