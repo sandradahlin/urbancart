@@ -6,9 +6,12 @@ import ThemeToggler from "../ThemeToggler/ThemeToggler";
 import { ButtonTertiary, StyledLink } from "../App.styled";
 import Dropdown from "../Dropdown/Dropdown";
 import UserInfo from "../UserInfo/UserInfo";
+import { useState } from "react";
 export default function Header() {
   const { logoutUser, userInfo, isAuthenticated, handleLogin } =
     useAuthContext();
+
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,14 +20,10 @@ export default function Header() {
   const renderUserAuthButtons = () => {
     if (isAuthenticated) {
       return (
-        // <ButtonTertiary
-        //   onClick={logoutUser}
-        //   className="btn btn-tertiary"
-        //   landing={isLandingPage}
-        // >
-        //   logout
-        // </ButtonTertiary>
-        <UserInfo />
+        <>
+          <UserInfo setShowDropdown={setShowDropdown} />
+          <Dropdown showDropdown={showDropdown} />
+        </>
       );
     }
 
