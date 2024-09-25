@@ -1,6 +1,4 @@
 import React, {
-  useContext,
-  useReducer,
   useEffect,
   useMemo,
   useState,
@@ -11,26 +9,29 @@ export function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [productsLimit, setProductsLimit] = useState(0);
   const [productsTotal, setProductsTotal] = useState(0);
+  const [query, setQuery] = useState("");
+
+  const getProducts = async () => {
+    try {
+      const url = query
+        ? `https://dummyjson.com/products/search?q=${query}`
+        : `https://dummyjson.com/products?limit=10&skip=${productsLimit}`;
+
+      const data = await fetch(url);
+
+      const parsed = await data.json();
+      setProducts(parsed.products);
+      setProductsTotal(parsed.total);
+      console.log(parsed);
+    } catch (error) {
+      console.error(error);
+      // Log error
+    }
+  };
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const data = await fetch(
-        `https://dummyjson.com/products?limit=10&skip=${productsLimit}`
-        );
-        const parsed = await data.json();
-        setProducts(parsed.products);
-        setProductsTotal(parsed.total)
-        console.log(parsed);
-      } catch (error) {
-        console.error(error);
-        // Log error
-      }
-    };
-
-
     getProducts();
-  }, [productsLimit]);
+  }, [query, productsLimit]);
 
   const paginateProducts = (increment = true) => {
     if (increment) {
@@ -38,7 +39,6 @@ export function ProductProvider({ children }) {
       return;
     }
     setProductsLimit(productsLimit - 10);
-
   };
   const api = useMemo(
     () => ({
@@ -46,6 +46,8 @@ export function ProductProvider({ children }) {
       paginateProducts,
       productsTotal,
       productsLimit,
+      query,
+      setQuery,
     }),
     [products]
   );

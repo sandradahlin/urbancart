@@ -5,6 +5,8 @@ const ProductContext = createContext({
   paginateProducts: () => {},
   productsTotal: 0,
   productsLimit: 0,
+  query: "",
+  setQuery: () => {},
 });
 
 export default ProductContext;

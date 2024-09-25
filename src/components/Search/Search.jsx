@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { SearchWrapper, SearchInput, StyledSearchIcon } from "./Search.styled";
-export default function Search() {
-  const [query, setQuery] = useState("");
+import ProductContext from "./../../context/ProductProvider/ProductContext";
 
-  const searchProducts = () => {
-    if (!query) {
-      return;
-    }
-  };
+export default function Search() {
+  const { setQuery } =
+    useContext(ProductContext);
 
   return (
     <SearchWrapper>
-      <SearchInput placeholder="Search products" />
+      <SearchInput placeholder="Search products" onChange={(e) => setQuery(e.target.value)} />
       <StyledSearchIcon>
         <FontAwesomeIcon icon={faSearch} />
       </StyledSearchIcon>

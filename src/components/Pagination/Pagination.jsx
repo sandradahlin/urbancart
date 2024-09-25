@@ -11,11 +11,15 @@ import {
 } from "./Pagination.styled";
 
 export default function Pagination() {
-  const { productsTotal, paginateProducts, productsLimit } =
+  const { productsTotal, paginateProducts, productsLimit, query } =
     useContext(ProductContext);
 
   const shouldDisableDecrement = productsLimit === 0 ? true : false;
   const shouldDisableIncrement = productsLimit >= productsTotal ? true : false;
+
+  if (query) {
+    return null;
+  }
 
   return (
     <StyledPaginationWrapper>
