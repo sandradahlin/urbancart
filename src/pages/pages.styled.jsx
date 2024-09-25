@@ -57,9 +57,17 @@ const StyledFormHeading = styled.p`
 const StyledValidationError = styled.span`
   position: absolute;
   bottom: 1.5rem;
-  left:3rem;
+  left: 3rem;
   font-size: 0.8rem;
   color: var(--clr-primary);
+`;
+
+/**
+ * Home page
+ */
+const CustomerWelcomeBox = styled.div`
+  padding: 1rem 3rem;
+  width: 50%;
 `;
 
 export {
@@ -71,4 +79,5 @@ export {
   StyledInput,
   StyledFormHeading,
   StyledValidationError,
+  CustomerWelcomeBox,
 };
