@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SearchWrapper = styled.div`
   width: 100%;
   padding: 0 3rem;
   position: relative;
 `;
+
 const SearchInput = styled.input`
   width: 100%;
   padding: 1rem;

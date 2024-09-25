@@ -7,6 +7,7 @@ const ProductContext = createContext({
   productsLimit: 0,
   query: "",
   setQuery: () => {},
+  loadingProducts: false,
 });
 
 export default ProductContext;

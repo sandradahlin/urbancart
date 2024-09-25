@@ -1,9 +1,11 @@
 import React from "react";
 import useAuthContext from "../context/AuthProvider/useAuthContext";
-
 import { NarrowContainer } from "../container/NarrowContainer";
-import { StyledProductImage, StyledLink } from "./pages.styled";
+import { StyledProductImage, StyledLink, StyledHeading } from "./pages.styled";
 
+/**
+ * User profile page
+ */
 export default function ProfilePage() {
   const { userInfo } = useAuthContext();
 
@@ -18,9 +20,9 @@ export default function ProfilePage() {
         <StyledLink to="/home"> {"< "}Back to products</StyledLink>
         <StyledProductImage src={image}></StyledProductImage>
         <div>
-          <h4>
+          <StyledHeading>
             {firstName} {lastName}
-          </h4>
+          </StyledHeading>
           <p>email: {email}</p>
           <p>username: {username}</p>
         </div>

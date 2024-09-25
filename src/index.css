@@ -5,6 +5,7 @@ Variables
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+
 :root {
   /* dark shades of primary color*/
   --bg-color-primary: #fff;
@@ -65,6 +66,8 @@ Global Styles
   --clr-blue: #ff943d;
   --clr-yellow: #7c8cf2;
   --clr-toggle: #fff;
+  --clr-black: #7c8cf2;
+
 }
 
 *,
@@ -81,20 +84,13 @@ body {
   line-height: 1.5;
   font-size: 0.875rem;
   background-color: var(--bg-color-primary);
-  /* background: linear-gradient(
-      0deg,
-      var(--bg-color-primary),
-      var(--bg-color-primary)
-    ),
-    url(./assets/back-img.jpg); */
-
   min-height: 100vh;
   transition: all 0.3s linear;
 }
 
 ::placeholder {
   /* modern browser */
-  font-family: "Roboto";
+  font-family: "Gowun Batang";
 }
 ul {
   list-style-type: none;
@@ -195,29 +191,55 @@ button:disabled{
   cursor: pointer;
   color: var(--clr-toggle);
 }
+
 .btn-primary {
   background-color: var(--clr-primary);
   text-transform: uppercase;
   color: var(--clr-white);
-
 }
+
 .btn-secondary {
   background-color: var(--clr-tertiary);
   text-transform: uppercase;
   border: 1px solid #888;
 }
+
 .btn-tertiary {
   background-color: transparent;
-   color: var(--clr-tertiary);
-
-
-  /* hover{
-    text-decoration: underline;
-    transition: all 0.3s;
-  } */
- 
+  color: var(--clr-tertiary);
 }
+
 /* section */
 .section {
   padding: 5rem 0;
+}
+
+.bouncing-loader {
+  display: flex;
+  justify-content: center;
+}
+
+.bouncing-loader > div {
+  width: 16px;
+  height: 16px;
+  margin: 3px 6px;
+  border-radius: 50%;
+  background-color: #a3a1a1;
+  opacity: 1;
+  animation: bouncing-loader 0.6s infinite alternate;
+}
+
+@keyframes bouncing-loader {
+  to {
+    opacity: 0.1;
+    transform: translateY(-16px);
+  }
+}
+
+.bouncing-loader > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.bouncing-loader > div:nth-child(3) {
+  animation-delay: 0.4s;
 }

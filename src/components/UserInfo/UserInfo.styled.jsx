@@ -4,9 +4,12 @@ const Avatar = styled.img`
   height: 2rem;
   margin-right: 0.5rem;
 `;
+
 const UserName = styled.span`
   letter-spacing: var(--spacing);
   font-size: 0.875rem;
+    color: ${(props) =>
+    props.$landing ? `var(--clr-tertiary)` : `var(--clr-black);`};
 `;
 
 const UserInfoWrapper = styled.div`

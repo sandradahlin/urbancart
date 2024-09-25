@@ -1,6 +1,4 @@
 import React, {
-  useContext,
-  useReducer,
   useEffect,
   useMemo,
   useState,
@@ -17,11 +15,11 @@ export function ThemeProvider({ children }) {
   }, [theme]);
 
   /**
-   *Toggles app theme - light or dark
+   * Toggles app theme - light or dark
    */
   const toggleTheme = (currentTheme) => {
     let theme = currentTheme === "light-theme" ? "dark-theme" : "light-theme";
-    setTheme(theme)
+    setTheme(theme);
   };
 
   const api = useMemo(

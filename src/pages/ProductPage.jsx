@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { NarrowContainer } from "../container/NarrowContainer";
 import { StyledProductImage, StyledLink } from "./pages.styled";
 
+/**
+ * Single product page
+ */
 export default function ProductPagePage() {
   const [product, setProduct] = useState(null);
 
@@ -32,6 +35,7 @@ export default function ProductPagePage() {
     shippingInformation,
     returnPolicy,
   } = product;
+  
   return (
     <>
       <NarrowContainer>

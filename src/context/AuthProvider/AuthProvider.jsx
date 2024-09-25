@@ -24,10 +24,16 @@ export function AuthProvider({ children }) {
     }
     const userInfo = parseJwt(token);
     // TODO: HANDLE EXPIRATION FOR REFRESHING THE TOKEN
-    console.log(userInfo, "'' info");
     setUserInfo(userInfo);
   }, []);
 
+
+  /**
+   * Handle user login
+   * @param {string} usernameInput 
+   * @param {string} passwordInput 
+   * @returns void
+   */
   const handleLogin = async (usernameInput, passwordInput) => {
     if (!usernameInput || !passwordInput) {
       return;
@@ -59,12 +65,13 @@ export function AuthProvider({ children }) {
       // handle refresh on effect user info
 
       const payload = parseJwt(accessToken);
-      console.log(payload, "*** payload");
+      // set the cookie
       document.cookie = createCookie(
         ACCESS_TOKEN,
         accessToken,
         new Date(payload.exp * 1000)
       );
+
       localStorage.setItem(REFRESH_ACCESS_TOKEN, refreshToken);
 
       const userInfo = {
@@ -85,6 +92,10 @@ export function AuthProvider({ children }) {
     }
   };
 
+  /**
+   * Refreshes user token
+   * @returns 
+   */
   const refreshToken = async () => {
     const token = localStorage.getItem(REFRESH_ACCESS_TOKEN);
     if (!token) {
@@ -100,21 +111,24 @@ export function AuthProvider({ children }) {
         }),
       });
       const parsed = await response.json();
-      console.log(parsed, "**** refesh token**************");
-    } catch (err) {}
+    } catch (err) {
+      // log error
+    }
   };
 
+  /**
+   * Handle user logout
+   */
   const logoutUser = () => {
     localStorage.removeItem(REFRESH_ACCESS_TOKEN);
-
     document.cookie = createRemoveCookie(ACCESS_TOKEN);
     setToken("");
   };
+
   // refresh token right before it expires
   useEffect(() => {
     if (!userInfo) {
       return;
-      //   return () => {};
     }
     console.log(
       "starting timer",

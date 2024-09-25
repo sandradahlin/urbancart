@@ -15,16 +15,13 @@ import {
  * Login page for customer login
  */
 export default function LoginPage() {
-  // const username = "emilys";
-  // const password = "emilyspass";
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState("");
 
   const navigate = useNavigate();
 
-  const { handleLogin } = useAuthContext();
+  const { handleLogin, isAuthenticated } = useAuthContext();
 
   const handleUsernameInputChange = (input) => {
     setValidationError("");
@@ -70,6 +67,11 @@ export default function LoginPage() {
       navigate("/home");
     }
   };
+
+  if (isAuthenticated) {
+    navigate("/home");
+    return <></>;
+  }
 
   return (
     <SectionContainer>

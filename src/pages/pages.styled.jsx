@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LandingPageBackground = styled.div`
   background: url(background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   // // TODO: change and calculate with Header
-  min-height: 106.8vh;
+  min-height: 108vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -17,8 +17,9 @@ const LandingPageBackground = styled.div`
 
 const StyledHeading = styled.h2`
   display: block;
-  font-size: 3rem;
-  color: var(--clr-tertiary);
+  font-size: ${(props) => (props.small ? "2rem" : "3rem")};
+  color: ${(props) =>
+    props.dark ? "var(--clr-black)" : "var(--clr-tertiary)"};
 `;
 
 const StyledIntro = styled.p`
@@ -57,7 +58,7 @@ const StyledInput = styled.input`
 
 const StyledFormHeading = styled.p`
   font-size: 2rem;
-  color: #444;
+  color: var(-clr-tertiary);
   letter-spacing: var(--spacing);
 `;
 

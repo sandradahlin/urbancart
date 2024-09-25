@@ -4,6 +4,9 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { SearchWrapper, SearchInput, StyledSearchIcon } from "./Search.styled";
 import ProductContext from "./../../context/ProductProvider/ProductContext";
 
+/**
+ * Search component
+ */
 export default function Search() {
   const { setQuery } =
     useContext(ProductContext);

@@ -7,6 +7,6 @@ export const SectionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
-  flex-wrap: ${props => props.wrap ? "wrap" : "nowrap"};
+  flex-direction: ${props => props.column ? "column" : "row"};
+  flex-wrap: ${props => props.$wrap ? "wrap" : "nowrap"};
 `;

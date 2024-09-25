@@ -21,15 +21,15 @@ const ButtonPrimary = styled(Button)`
 
 const ButtonSecondary = styled(Button)`
   background-color: transparent;
-  color: var(--clr-white);
+  color: var(--clr-tertiary);
   text-transform: uppercase;
-  border: 1px solid #888;
+  border: 1px solid var(--clr-tertiary);
 `;
 
 const ButtonTertiary = styled(Button)`
   background-color: transparent;
   color: ${(props) =>
-    props.landing ? `var(--clr-white)` : `var(--clr-black);`};
+    props.$landing ? `var(--clr-tertiary)` : `var(--clr-black);`};
 `;
 
 const StyledLink = styled(Link)`
@@ -41,6 +41,6 @@ const StyledLink = styled(Link)`
   border: none;
   cursor: pointer;
   color: ${(props) =>
-    props.landing ? `var(--clr-white)` : `var(--clr-black);`};
+    props.landing ? `var(--clr-tertiary)` : `var(--clr-black);`};
 `;
 export { ButtonPrimary, ButtonSecondary, ButtonTertiary, StyledLink };

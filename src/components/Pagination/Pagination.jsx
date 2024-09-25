@@ -1,15 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import ProductContext from "./../../context/ProductProvider/ProductContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleChevronRight,
-  faCircleChevronLeft,
-} from "@fortawesome/free-solid-svg-icons";
 import {
   StyledPaginationWrapper,
   StyledPaginationArrow,
 } from "./Pagination.styled";
 
+/**
+ * Pagination compoennt for paginating the products.
+ * Does not render for search.
+ */
 export default function Pagination() {
   const { productsTotal, paginateProducts, productsLimit, query } =
     useContext(ProductContext);
