@@ -138,6 +138,10 @@ p {
   margin-bottom: 1.25rem;
   color: var(--clr-toggle);
 }
+
+button:disabled{
+  cursor: auto;
+}
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 3rem;

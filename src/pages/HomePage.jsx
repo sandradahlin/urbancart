@@ -3,24 +3,14 @@ import { Link } from "react-router-dom";
 import { SectionContainer } from "../container/SectionContainer";
 import { CustomerWelcomeBox } from "./pages.styled";
 import Search from "../components/Search/Search";
+import Pagination from "../components/Pagination/Pagination";
+import useProductContext from "../context/ProductProvider/useProductContext";
 export default function HomePage() {
-  const [products, setProducts] = useState([]);
+  const {products, getProducts} = useProductContext();
 
-  useEffect(() => {
-    const getArticles = async () => {
-      try {
-        const data = await fetch("https://dummyjson.com/products");
-        const parsed = await data.json();
-        setProducts(parsed.products);
-        console.log(parsed);
-      } catch (error) {
-        console.error(error);
-        // Log error
-      }
-    };
-
-    getArticles();
-  }, []);
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
 
   if (!products) {
     return <p>no products</p>;
@@ -47,6 +37,7 @@ export default function HomePage() {
           </div>
         ))}
       </SectionContainer>
+      <Pagination />
     </>
   );
 }

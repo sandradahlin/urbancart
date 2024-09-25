@@ -4,12 +4,16 @@ import "./index.css";
 import App from "./application/App";
 import { AuthProvider } from "./context/AuthProvider/AuthProvider";
 import { ThemeProvider } from "./context/ThemeProvider/ThemeProvider";
+import { ProductProvider } from "./context/ProductProvider/ProductProvider";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider>
     <AuthProvider>
-      <App />
+      <ProductProvider>
+        <App />
+      </ProductProvider>
     </AuthProvider>
   </ThemeProvider>
 );
