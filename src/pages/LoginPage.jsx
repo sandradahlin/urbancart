@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { SectionContainer } from "../container/SectionContainer";
-import useAuthContext from "../context/useAuthContext";
+import useAuthContext from "../context/AuthProvider/useAuthContext";
 import { createCookie, parseJwt } from "../utils";
 import { ACCESS_TOKEN, REFRESH_ACCESS_TOKEN } from "../constants";
 
@@ -26,7 +26,7 @@ export default function LoginPage() {
       setPasswordError("Please enter password");
     }
 
-    if (/^\S+@\S+\.\S+$/.test(email)) {
+    if (/^\S+@\S+\.\S+$/.test("email")) {
       setUsernameError("Please enter a valid email");
     }
     if (password.length < 7) {
@@ -41,7 +41,8 @@ export default function LoginPage() {
     <>
       <h2>Login</h2>
       <SectionContainer>
-        <form onSubmit={handleSubmit}>
+        <form>
+          {" "}
           <input
             placeholder="Enter your username"
             onChange={(e) => setUsername(e.target.value)}

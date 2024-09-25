@@ -6,7 +6,7 @@ import ProfilePage from "../pages/ProfilePage";
 import LoginPage from "../pages/LoginPage";
 import LandingPage from "../pages/LandingPage";
 
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import PrivateRoutes from "../components/PrivateRoutes";
 
 function App() {

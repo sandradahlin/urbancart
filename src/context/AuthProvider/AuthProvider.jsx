@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import AuthContext from "./AuthContext";
-import { ACCESS_TOKEN, REFRESH_ACCESS_TOKEN } from "../constants";
-import { createCookie, createRemoveCookie, getCookie, parseJwt } from "../utils";
+import { ACCESS_TOKEN, REFRESH_ACCESS_TOKEN } from "../../constants";
+import { createCookie, createRemoveCookie, getCookie, parseJwt } from "../../utils";
 
 const FIVE_MINUTES_IN_MS = 0.5 * 60 * 1000;
 

@@ -50,3 +50,20 @@ export const getCookie = (sourceCookie, key) => {
 
   return items[key];
 };
+
+/**
+ * Theme toggle
+ */
+/**
+ * @method getStorageTheme
+ * @param {string} initialTheme - initial theme.
+ * @returns {string} - defaults to initial theme or returns theme set on local storage.
+ */
+
+export const getStorageTheme = (initialTheme) => {
+  let theme = initialTheme;
+  if (localStorage.getItem("theme")) {
+    theme = localStorage.getItem("theme");
+  }
+  return theme;
+};
