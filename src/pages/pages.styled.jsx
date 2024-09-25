@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link, useParams } from "react-router-dom";
 
 const LandingPageBackground = styled.div`
   background: url(sale.gif);
@@ -70,6 +71,31 @@ const CustomerWelcomeBox = styled.div`
   width: 50%;
 `;
 
+/**
+ * Product page
+ */
+
+const StyledProductImage = styled.img`
+  width: 50%;
+  height: auto;
+`;
+
+const StyledProductInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledPriceInfo = styled.span`
+  margin-bottom: 0.75rem;
+`;
+
+const StyledLink = styled(Link)`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
 export {
   LandingPageBackground,
   StyledHeading,
@@ -80,4 +106,8 @@ export {
   StyledFormHeading,
   StyledValidationError,
   CustomerWelcomeBox,
+  StyledProductImage,
+  StyledProductInfo,
+  StyledPriceInfo,
+  StyledLink,
 };

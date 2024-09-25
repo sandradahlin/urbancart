@@ -1,24 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-// import { SectionContainer } from "../containers/SectionContainer";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { NarrowContainer } from "../container/NarrowContainer";
+import { StyledProductImage, StyledLink } from "./pages.styled";
 
 export default function ProductPagePage() {
-  const [products, setProducts] = useState(null);
-  const {id} = useParams();
-  console.log(id, "** par")
+  const [product, setProduct] = useState(null);
+
+  const { id } = useParams();
+
   useEffect(() => {
     const getArticle = async () => {
       const data = await fetch(`https://dummyjson.com/products/${id}`);
       const parsed = await data.json();
-      setProducts(parsed);
+      setProduct(parsed);
       console.log(parsed);
     };
 
     getArticle();
   }, []);
+
+  if (!product) {
+    return null;
+  }
+
+  const {
+    brand,
+    description,
+    price,
+    title,
+    images: [image],
+    shippingInformation,
+    returnPolicy,
+  } = product;
   return (
     <>
-      <h2>single</h2>
+      <NarrowContainer>
+        <StyledLink to="/home"> {"< "}Back to products</StyledLink>
+        <StyledProductImage src={image}></StyledProductImage>
+        <div>
+          <h4>{title}</h4>
+          <p>{price} $</p>
+          <p>{description}</p>
+          <p>{brand}</p>
+          <p>{shippingInformation}</p>
+          <p>{returnPolicy}</p>
+          <button className="btn btn-primary">Buy now</button>
+        </div>
+      </NarrowContainer>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SectionContainer = styled.div`
+export const NarrowContainer = styled.div`
   min-height: 85vh;
   padding: 3rem;
   margin: 0 auto;
@@ -8,5 +8,6 @@ export const SectionContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  flex-wrap: ${props => props.wrap ? "wrap" : "nowrap"};
+  width: 70%;
+  position: relative;
 `;

@@ -20,7 +20,7 @@ function App() {
             <Route exact path="/home" element={<HomePage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
-          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/home/product/:id" element={<ProductPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>

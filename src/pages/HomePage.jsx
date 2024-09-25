@@ -27,7 +27,7 @@ export default function HomePage() {
         </p>
       </CustomerWelcomeBox>
       <Search />
-      <SectionContainer>
+      <SectionContainer wrap>
         {products?.map((product) => (
           <div>
             <Link to={`product/${product.id}`}>
