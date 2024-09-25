@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuthContext from "../../context/AuthProvider/useAuthContext";
 import { StyledHeader, StyledImage, UserControls } from "./Header.styled";
 import logo from "../..";
@@ -8,6 +8,8 @@ import { ButtonTertiary, StyledLink } from "../App.styled";
 export default function Header() {
   const { logoutUser, userInfo, isAuthenticated, handleLogin } =
     useAuthContext();
+
+  const navigate = useNavigate();
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
 
@@ -32,7 +34,7 @@ export default function Header() {
   };
   return (
     <StyledHeader>
-      <StyledImage src="/logonew.png" />
+      <StyledImage src="/logonew.png" onClick={() => navigate("/")} />
       <UserControls>
         {/* // rewrtei to styled */}
         {renderUserAuthButtons()}

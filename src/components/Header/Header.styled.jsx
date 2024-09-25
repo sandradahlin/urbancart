@@ -11,13 +11,13 @@ const StyledHeader = styled.div`
 
 const StyledImage = styled.img`
   height: 5rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const UserControls = styled.div`
   display: flex;
 `;
-
-
-
 
 export { StyledHeader, StyledImage, UserControls };
