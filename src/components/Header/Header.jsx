@@ -1,23 +1,33 @@
-import { Link } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 import useAuthContext from "../../context/AuthProvider/useAuthContext";
 import { StyledHeader, StyledImage, UserControls } from "./Header.styled";
 import logo from "../..";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
+import { ButtonTertiary, StyledLink } from "../App.styled";
 
 export default function Header() {
-  const { logoutUser, userInfo, isAuthenticated, handleLogin } = useAuthContext();
+  const { logoutUser, userInfo, isAuthenticated, handleLogin } =
+    useAuthContext();
+  const location = useLocation();
+  const isLandingPage = location.pathname === "/";
 
   const renderUserAuthButtons = () => {
     if (isAuthenticated) {
       return (
-        <button onClick={logoutUser} className="btn btn-tertiary">
+        <ButtonTertiary
+          onClick={logoutUser}
+          className="btn btn-tertiary"
+          landing={isLandingPage}
+        >
           logout
-        </button>
+        </ButtonTertiary>
       );
     }
+
     return (
-     <Link to="/login">login</Link>
+      <StyledLink to="/login" landing={isLandingPage}>
+        login
+      </StyledLink>
     );
   };
   return (
