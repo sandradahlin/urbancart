@@ -17,9 +17,13 @@ const LandingPageBackground = styled.div`
 
 const StyledHeading = styled.h2`
   display: block;
-  font-size: ${(props) => (props.small ? "2rem" : "3rem")};
+  font-size: ${(props) => (props.$small ? "2rem" : "3rem")};
   color: ${(props) =>
     props.dark ? "var(--clr-black)" : "var(--clr-tertiary)"};
+  color: ${(props) => props.$override && "var(--clr-black)"};
+  @media (max-width: 576px) {
+    text-align: center;
+  }
 `;
 
 const StyledIntro = styled.p`
@@ -49,6 +53,9 @@ const StyledFormWrapper = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -76,6 +83,13 @@ const StyledValidationError = styled.span`
 const CustomerWelcomeBox = styled.div`
   padding: 1rem 3rem;
   width: 50%;
+  @media (max-width: 576px) {
+    width: 100%;
+  }
+`;
+
+const ProductWrapper = styled.div`
+  text-align: center;
 `;
 
 /**
@@ -101,6 +115,11 @@ const StyledLink = styled(Link)`
   position: absolute;
   top: 0;
   left: 0;
+  color: var(--clr-black);
+`;
+
+const StyledEnhancedText = styled.span`
+  font-weight: 600;
 `;
 
 export {
@@ -118,4 +137,6 @@ export {
   StyledProductInfo,
   StyledPriceInfo,
   StyledLink,
+  StyledEnhancedText,
+  ProductWrapper,
 };

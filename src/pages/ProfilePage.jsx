@@ -20,7 +20,7 @@ export default function ProfilePage() {
         <StyledLink to="/home"> {"< "}Back to products</StyledLink>
         <StyledProductImage src={image}></StyledProductImage>
         <div>
-          <StyledHeading>
+          <StyledHeading $small $override>
             {firstName} {lastName}
           </StyledHeading>
           <p>email: {email}</p>

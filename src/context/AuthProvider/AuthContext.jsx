@@ -8,6 +8,8 @@ const AuthContext = createContext({
   logoutUser: () => {},
   isAuthenticated: false,
   handleLogin: () => {},
+  showAuthOverlay: false,
+  setShowAuthOverlay: () => {},
 });
 
 export default AuthContext;

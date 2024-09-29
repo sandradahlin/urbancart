@@ -10,4 +10,7 @@ export const NarrowContainer = styled.div`
   flex-direction: row;
   width: 70%;
   position: relative;
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
 `;

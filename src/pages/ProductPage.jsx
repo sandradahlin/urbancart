@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { NarrowContainer } from "../container/NarrowContainer";
-import { StyledProductImage, StyledLink } from "./pages.styled";
+import { StyledProductImage, StyledLink, StyledHeading, StyledEnhancedText } from "./pages.styled";
 
 /**
  * Single product page
@@ -42,10 +42,10 @@ export default function ProductPagePage() {
         <StyledLink to="/home"> {"< "}Back to products</StyledLink>
         <StyledProductImage src={image}></StyledProductImage>
         <div>
-          <h4>{title}</h4>
+          <StyledHeading $override $small>{title}</StyledHeading>
           <p>{price} $</p>
           <p>{description}</p>
-          <p>{brand}</p>
+          <p>Brand: <StyledEnhancedText>{brand}</StyledEnhancedText></p>
           <p>{shippingInformation}</p>
           <p>{returnPolicy}</p>
           <button className="btn btn-primary">Buy now</button>

@@ -7,7 +7,7 @@ import LandingPage from "../pages/LandingPage";
 import Header from "../components/Header/Header";
 import PrivateRoutes from "../components/PrivateRoutes";
 import EmptyPage from "../pages/EmptyPage";
-import VerifyAuth from "../components/VerifyAuth";
+import Overlay from "../components/Overlay/Overlay";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/*" element={<EmptyPage />} />
         </Routes>
-        <VerifyAuth />
+        <Overlay />
       </BrowserRouter>
     </>
   );

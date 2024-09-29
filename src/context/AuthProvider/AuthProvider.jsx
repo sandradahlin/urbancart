@@ -8,11 +8,12 @@ import {
   parseJwt,
 } from "../../utils";
 
-const FIVE_MINUTES_IN_MS = 0.5 * 60 * 1000;
+// const FIVE_MINUTES_IN_MS = 0.5 * 60 * 1000;
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(getCookie(document.cookie, ACCESS_TOKEN));
   const [userInfo, setUserInfo] = useState(null);
+  const [showAuthOverlay, setShowAuthOverlay] = useState(false);
 
   const isAuthenticated = !!token;
 
@@ -27,11 +28,10 @@ export function AuthProvider({ children }) {
     setUserInfo(userInfo);
   }, []);
 
-
   /**
    * Handle user login
-   * @param {string} usernameInput 
-   * @param {string} passwordInput 
+   * @param {string} usernameInput
+   * @param {string} passwordInput
    * @returns void
    */
   const handleLogin = async (usernameInput, passwordInput) => {
@@ -81,8 +81,11 @@ export function AuthProvider({ children }) {
         lastName,
         gender,
         image,
-        tokenExpiresAt: payload.exp * 1000,
+        exp: payload.exp,
       };
+
+      console.log(payload.exp, "*** paylöooad");
+      console.log(payload.exp * 1000, "*** paylöooad");
 
       setUserInfo(userInfo);
       setToken(accessToken);
@@ -94,7 +97,7 @@ export function AuthProvider({ children }) {
 
   /**
    * Refreshes user token
-   * @returns 
+   * @returns
    */
   const refreshToken = async () => {
     const token = localStorage.getItem(REFRESH_ACCESS_TOKEN);
@@ -125,24 +128,19 @@ export function AuthProvider({ children }) {
     setToken("");
   };
 
-  // refresh token right before it expires
+  // TODO: refresh token right before it expires
   useEffect(() => {
     if (!userInfo) {
       return;
     }
-    console.log(
-      "starting timer",
-      userInfo.tokenExpiresAt - FIVE_MINUTES_IN_MS - Date.now()
-    );
 
-    const refreshTimer = setTimeout(() => {
-      console.log("inside timer");
+    const logoutTimer = setTimeout(() => {
+      logoutUser();
+      setShowAuthOverlay(true);
+    }, userInfo.exp * 1000 - Date.now());
 
-      refreshToken();
-    }, userInfo.tokenExpiresAt - FIVE_MINUTES_IN_MS - Date.now());
-
-    return clearTimeout(refreshTimer);
-  }, [token]);
+    return () => clearTimeout(logoutTimer);
+  }, [userInfo]);
 
   const api = useMemo(
     () => ({
@@ -153,8 +151,10 @@ export function AuthProvider({ children }) {
       logoutUser,
       isAuthenticated,
       handleLogin,
+      showAuthOverlay,
+      setShowAuthOverlay,
     }),
-    [token, userInfo]
+    [token, userInfo, showAuthOverlay]
   );
 
   return <AuthContext.Provider value={api}>{children}</AuthContext.Provider>;

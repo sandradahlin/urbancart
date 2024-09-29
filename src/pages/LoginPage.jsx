@@ -10,6 +10,7 @@ import {
   StyledFormHeading,
   StyledValidationError,
 } from "./pages.styled";
+import Loader from "../components/Loader/Loader";
 
 /**
  * Login page for customer login
@@ -17,7 +18,9 @@ import {
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const [validationError, setValidationError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -59,14 +62,20 @@ export default function LoginPage() {
    * Handles data submission by user and validates fields
    * If successful handle loging in user
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const validationSuccessful = validateInputFields();
     if (validationSuccessful) {
-      handleLogin(username, password);
+      await handleLogin(username, password);
       navigate("/home");
     }
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   if (isAuthenticated) {
     navigate("/home");

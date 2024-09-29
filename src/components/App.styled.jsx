@@ -41,6 +41,6 @@ const StyledLink = styled(Link)`
   border: none;
   cursor: pointer;
   color: ${(props) =>
-    props.landing ? `var(--clr-tertiary)` : `var(--clr-black);`};
+    props.$landing ? `var(--clr-tertiary)` : `var(--clr-black);`};
 `;
 export { ButtonPrimary, ButtonSecondary, ButtonTertiary, StyledLink };
